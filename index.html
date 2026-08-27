@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大脇茂雄 ｜ 牛の臨床獣医師</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950:#0A1A33; --navy-900:#0E2140; --navy-850:#132a4e; --navy-800:#16294A;
+    --ink:#16233F; --ink-soft:#4A5A72;
+    --paper:#F8F7F3; --paper-2:#FFFFFF;
+    --gold:#C8A24B; --gold-bright:#E7CE8A; --gold-deep:#A07E2C;
+    --line-dark:rgba(214,196,150,.22); --line-light:#E6E2D6;
+    --slate:#9FB0C8;
+    --disp:"Fraunces",Georgia,"Times New Roman",serif;
+    --jp-serif:"Noto Serif JP","Yu Mincho",serif;
+    --jp:"Noto Sans JP","Yu Gothic UI","Yu Gothic","Meiryo",sans-serif;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--jp);background:var(--paper);color:var(--ink);line-height:1.8;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+
+  /* eyebrow / labels */
+  .eyebrow{font-family:var(--jp);font-size:11px;font-weight:700;letter-spacing:.34em;text-transform:uppercase;color:var(--gold-deep);}
+  .eyebrow.on-dark{color:var(--gold-bright);}
+  .rule{height:1px;background:var(--gold);width:44px;border:0;}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+    padding:16px 28px;transition:background .35s,backdrop-filter .35s,padding .35s;}
+  nav.scrolled{background:rgba(10,26,51,.86);backdrop-filter:blur(10px);padding:11px 28px;border-bottom:1px solid var(--line-dark);}
+  nav .brand{font-family:var(--disp);font-size:19px;font-weight:500;letter-spacing:.02em;color:#fff;}
+  nav .brand span{color:var(--gold-bright);}
+  nav .links{display:flex;align-items:center;gap:26px;}
+  nav .links a{font-size:12.5px;letter-spacing:.12em;color:#D6DEEC;font-weight:500;}
+  nav .links a:hover{color:var(--gold-bright);}
+  nav .cta{font-size:12px;letter-spacing:.1em;color:var(--navy-950);background:var(--gold);padding:9px 16px;border-radius:2px;font-weight:700;}
+  nav .cta:hover{background:var(--gold-bright);color:var(--navy-950);}
+  @media(max-width:720px){ nav .links a:not(.cta){display:none;} nav .brand{font-size:15.5px;letter-spacing:.01em;} }
+
+  /* HERO */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;
+    background:
+      radial-gradient(1100px 600px at 78% 12%,rgba(200,162,75,.12),transparent 60%),
+      linear-gradient(160deg,#0A1A33 0%,#0C1E3B 46%,#0A192F 100%);
+    color:#fff;overflow:hidden;}
+  .hero::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px);background-size:100% 34px;opacity:.5;}
+  .hero .wrap{position:relative;z-index:2;width:100%;padding-top:120px;padding-bottom:80px;}
+  .hero .kicker{display:flex;align-items:center;gap:14px;margin-bottom:26px;}
+  .hero .kicker .rule{width:34px;}
+  .hero h1{font-family:var(--disp);font-weight:300;font-size:clamp(52px,10vw,116px);line-height:.94;letter-spacing:-.02em;color:#fff;}
+  .hero h1 em{font-style:italic;color:var(--gold-bright);font-weight:300;}
+  .hero .jp-name{font-family:var(--jp-serif);font-weight:600;font-size:clamp(20px,3.4vw,30px);letter-spacing:.16em;color:#EAF0F8;margin-top:18px;}
+  .hero .jp-name small{font-family:var(--jp);font-weight:400;font-size:14px;letter-spacing:.14em;color:var(--slate);margin-left:14px;}
+  .hero .lede{max-width:46ch;margin-top:26px;color:#C7D2E2;font-size:16px;line-height:1.9;}
+  .triptych{display:flex;gap:0;margin-top:44px;border-top:1px solid var(--line-dark);max-width:640px;}
+  .triptych .t{flex:1;padding:20px 4px 0;border-right:1px solid var(--line-dark);}
+  .triptych .t:last-child{border-right:0;}
+  .triptych .t .num{font-family:var(--disp);font-size:13px;font-style:italic;color:var(--gold);}
+  .triptych .t .jp{font-family:var(--jp-serif);font-weight:600;font-size:17px;color:#fff;margin:6px 0 3px;}
+  .triptych .t .en{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--slate);}
+  .scrollcue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;font-size:10.5px;letter-spacing:.3em;color:var(--slate);text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px;}
+  .scrollcue::after{content:"";width:1px;height:34px;background:linear-gradient(var(--gold),transparent);}
+
+  /* SECTION基本 */
+  section{padding:100px 0;}
+  .sec-head{display:flex;flex-direction:column;gap:16px;margin-bottom:46px;}
+  .sec-head h2{font-family:var(--jp-serif);font-weight:600;font-size:clamp(26px,4vw,38px);line-height:1.35;letter-spacing:.02em;}
+  .sec-head .en{font-family:var(--disp);font-style:italic;font-weight:400;font-size:17px;color:var(--gold-deep);}
+  .on-dark .sec-head h2{color:#fff;}
+  .on-dark .sec-head .en{color:var(--gold-bright);}
+
+  /* ABOUT */
+  .about{background:var(--paper);}
+  .about .grid{display:grid;grid-template-columns:1.2fr .9fr;gap:60px;align-items:start;}
+  @media(max-width:820px){.about .grid{grid-template-columns:1fr;gap:36px;}}
+  .about p{font-size:16px;color:var(--ink-soft);margin-bottom:18px;line-height:2;}
+  .about p .lead{color:var(--ink);font-weight:500;}
+  .about .facts{border-left:1px solid var(--gold);padding-left:24px;}
+  .about .facts dt{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep);font-weight:700;margin-top:20px;}
+  .about .facts dt:first-child{margin-top:0;}
+  .about .facts dd{font-family:var(--jp-serif);font-size:16px;color:var(--ink);margin-top:4px;}
+
+  /* APPS (dark) */
+  .apps{background:linear-gradient(180deg,#0C1E3B,#0A1A33);color:#fff;}
+  .apps .intro{max-width:60ch;color:#C7D2E2;font-size:16px;margin-bottom:40px;line-height:1.95;}
+  .apps .row{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media(max-width:820px){.apps .row{grid-template-columns:1fr;}}
+  .appcard{border:1px solid var(--line-dark);border-radius:3px;padding:30px 26px;background:rgba(255,255,255,.015);transition:transform .3s,border-color .3s,background .3s;}
+  .appcard:hover{transform:translateY(-5px);border-color:rgba(214,196,150,.5);background:rgba(200,162,75,.05);}
+  .appcard .badge{font-family:var(--disp);font-size:26px;font-weight:500;color:var(--gold-bright);letter-spacing:.04em;}
+  .appcard .app-icon{width:56px;height:56px;border-radius:13px;display:block;box-shadow:0 6px 18px rgba(0,0,0,.35);}
+  .appcard .en{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--slate);margin-top:4px;}
+  .appcard h3{font-family:var(--jp-serif);font-size:19px;font-weight:600;margin:18px 0 10px;color:#fff;}
+  .appcard p{font-size:13.5px;color:#AFBED2;line-height:1.85;}
+  .appcard .shot{aspect-ratio:16/10;overflow:hidden;border-radius:4px;border:1px solid rgba(255,255,255,.12);margin-bottom:20px;background:#0d1526;}
+  .appcard .shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;}
+  .apps .accessnote{margin-top:40px;display:flex;gap:16px;align-items:baseline;flex-wrap:wrap;border-top:1px solid var(--line-dark);padding-top:26px;}
+  .apps .accessnote .big{font-family:var(--jp-serif);font-size:20px;color:#fff;}
+  .apps .accessnote .sub{color:var(--slate);font-size:13.5px;}
+  .apps .accessnote .gold{color:var(--gold-bright);}
+  .offduty{margin-top:22px;display:flex;gap:24px;align-items:flex-start;border:1px dashed rgba(214,196,150,.42);border-radius:4px;padding:22px 26px;background:rgba(200,162,75,.045);}
+  .offduty .od-icon{width:72px;height:72px;border-radius:16px;flex-shrink:0;box-shadow:0 8px 22px rgba(0,0,0,.35);}
+  .offduty .od-tag{display:inline-block;font-family:var(--jp);font-size:10px;letter-spacing:.2em;font-weight:700;color:var(--gold-bright);border:1px solid var(--line-dark);border-radius:2px;padding:3px 9px;}
+  .offduty h3{font-family:var(--jp-serif);font-size:18px;color:#fff;margin:9px 0 6px;}
+  .offduty p{font-size:13px;color:#AFBED2;line-height:1.8;max-width:72ch;}
+  .offduty .od-links{margin-top:14px;display:flex;gap:20px;flex-wrap:wrap;}
+  .offduty .od-links a{font-size:12.5px;letter-spacing:.06em;color:var(--gold-bright);font-weight:700;}
+  .offduty .od-links a:hover{color:#fff;}
+  @media(max-width:560px){.offduty{flex-direction:column;align-items:flex-start;}}
+  .offduty-sec{background:linear-gradient(180deg,#0C1E3B,#0A1A33);color:#fff;}
+  .offduty-sec .od-intro{color:#C7D2E2;font-size:15px;margin-bottom:24px;line-height:1.9;}
+
+  /* ACCESS / 申込 (dark deeper) */
+  .access{background:var(--navy-950);color:#fff;}
+  .access .panel{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+  @media(max-width:820px){.access .panel{grid-template-columns:1fr;gap:32px;}}
+  .access .lede{color:#C7D2E2;font-size:15.5px;line-height:1.95;margin-top:8px;}
+  .access ol{list-style:none;counter-reset:a;margin-top:22px;}
+  .access ol li{counter-increment:a;position:relative;padding:8px 0 8px 40px;font-size:14px;color:#D6DEEC;}
+  .access ol li::before{content:counter(a);position:absolute;left:0;top:7px;width:24px;height:24px;border:1px solid var(--gold);color:var(--gold-bright);border-radius:50%;font-family:var(--disp);font-size:12px;text-align:center;line-height:23px;}
+  .form{background:rgba(255,255,255,.03);border:1px solid var(--line-dark);border-radius:4px;padding:30px 28px;}
+  .form label{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-bright);margin-bottom:8px;font-weight:700;}
+  .form input,.form select{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line-dark);border-radius:3px;padding:13px 14px;color:#fff;font-family:var(--jp);font-size:15px;}
+  .form input::placeholder{color:#7C8BA3;}
+  .form input:focus,.form select:focus{outline:none;border-color:var(--gold);background:rgba(200,162,75,.06);}
+  .form select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%23C8A24B' stroke-width='1.5' fill='none'/></svg>");background-repeat:no-repeat;background-position:right 14px center;padding-right:34px;}
+  .form select option{background:#0E2140;color:#fff;}
+  .form .field-gap{margin-top:16px;}
+  .form .chips{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 6px;}
+  .form .chip{font-size:12.5px;color:#CBD5E4;border:1px solid var(--line-dark);border-radius:999px;padding:7px 14px;cursor:pointer;user-select:none;transition:.2s;}
+  .form .chip[aria-pressed="true"]{background:var(--gold);color:var(--navy-950);border-color:var(--gold);font-weight:700;}
+  .form button{width:100%;margin-top:18px;background:var(--gold);color:var(--navy-950);border:0;border-radius:3px;padding:14px;font-family:var(--jp);font-weight:700;font-size:15px;letter-spacing:.04em;cursor:pointer;transition:.2s;}
+  .form button:hover{background:var(--gold-bright);}
+  .form .msg{font-size:13px;color:var(--gold-bright);margin-top:12px;min-height:1.2em;line-height:1.6;}
+  .form .privacy{font-size:11.5px;color:#7C8BA3;margin-top:14px;line-height:1.7;}
+
+  /* RESEARCH (light) */
+  .research{background:var(--paper-2);}
+  .pub{border-top:1px solid var(--line-light);padding:30px 0;display:grid;grid-template-columns:120px 1fr auto;gap:28px;align-items:start;}
+  @media(max-width:720px){.pub{grid-template-columns:1fr;gap:12px;}}
+  .pub .year{font-family:var(--disp);font-size:34px;font-style:italic;font-weight:400;color:var(--gold-deep);line-height:1;}
+  .pub .venue{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-top:8px;}
+  .pub .award{display:inline-block;font-size:10.5px;letter-spacing:.1em;font-weight:700;color:var(--gold-deep);border:1px solid var(--gold);border-radius:2px;padding:4px 9px;margin-bottom:10px;}
+  .pub h3{font-family:var(--jp-serif);font-size:19px;font-weight:600;line-height:1.6;color:var(--ink);}
+  .pub .authors{font-size:13.5px;color:var(--ink-soft);margin-top:10px;}
+  .pub .authors b{color:var(--ink);border-bottom:2px solid var(--gold);}
+  .pub .meta{font-size:12.5px;color:var(--ink-soft);margin-top:6px;}
+  .pub .link{align-self:center;white-space:nowrap;font-size:12.5px;letter-spacing:.08em;color:var(--gold-deep);font-weight:700;border:1px solid var(--gold);padding:9px 16px;border-radius:2px;transition:.2s;}
+  .pub .link:hover{background:var(--gold);color:#fff;}
+  .research .note{font-size:12.5px;color:var(--ink-soft);margin-top:26px;}
+
+  /* TALKS */
+  .talks{background:var(--paper-2);}
+  .talk{border-top:1px solid var(--line-light);padding:22px 0;display:grid;grid-template-columns:140px 1fr;gap:28px;align-items:baseline;}
+  @media(max-width:640px){.talk{grid-template-columns:1fr;gap:6px;}}
+  .talk .when{font-family:var(--disp);font-style:italic;font-size:20px;color:var(--gold-deep);}
+  .talk .venue{font-size:11.5px;color:var(--ink-soft);margin-top:6px;line-height:1.5;}
+  .talk h3{font-family:var(--jp-serif);font-size:17px;font-weight:600;color:var(--ink);line-height:1.65;}
+  .talk .role{font-size:12.5px;color:var(--ink-soft);margin-top:8px;}
+  .talks .note{font-size:12.5px;color:var(--ink-soft);margin-top:26px;}
+
+  /* MEDIA / 誌面・寄稿 */
+  .media{background:var(--paper);}
+  .contrib{border-top:1px solid var(--line-light);padding:26px 0;display:grid;grid-template-columns:120px 1fr auto;gap:28px;align-items:start;}
+  @media(max-width:720px){.contrib{grid-template-columns:1fr;gap:10px;}}
+  .contrib .when{font-family:var(--disp);font-style:italic;font-size:22px;color:var(--gold-deep);}
+  .contrib .venue{font-size:11px;letter-spacing:.1em;color:var(--ink-soft);margin-top:6px;}
+  .contrib h3{font-family:var(--jp-serif);font-size:18px;font-weight:600;color:var(--ink);line-height:1.6;}
+  .contrib .role{font-size:12.5px;color:var(--ink-soft);margin-top:8px;line-height:1.6;}
+  .contrib .link{align-self:center;white-space:nowrap;font-size:12.5px;letter-spacing:.08em;color:var(--gold-deep);font-weight:700;border:1px solid var(--gold);padding:9px 16px;border-radius:2px;transition:.2s;}
+  .contrib .link:hover{background:var(--gold);color:#fff;}
+  .serial-when{display:inline-block;font-family:var(--jp);font-size:12px;font-weight:700;letter-spacing:.18em;color:var(--gold-deep);border:1px solid var(--gold);border-radius:2px;padding:4px 10px;}
+  .media .note{font-size:12.5px;color:var(--ink-soft);margin-top:26px;}
+
+  /* BOOKS / 著書 */
+  .books{background:linear-gradient(180deg,#0A1A33,#0C1E3B);color:#fff;}
+  .books .intro{max-width:56ch;color:#C7D2E2;font-size:16px;margin-bottom:44px;line-height:1.95;}
+  .book-row{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;}
+  @media(max-width:820px){.book-row{grid-template-columns:1fr;max-width:320px;margin:0 auto;}}
+  .book{display:block;text-align:center;transition:transform .3s;}
+  .book:hover{transform:translateY(-6px);}
+  .book .cover img{width:100%;max-width:230px;height:auto;border-radius:2px;box-shadow:0 18px 44px rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.08);}
+  .book h3{font-family:var(--jp-serif);font-size:16.5px;font-weight:600;color:#fff;margin-top:20px;line-height:1.55;}
+  .book .pub{font-size:12px;color:var(--slate);margin-top:8px;line-height:1.65;}
+  .book .role{display:inline-block;font-size:10.5px;letter-spacing:.14em;font-weight:700;color:var(--navy-950);background:var(--gold);border-radius:2px;padding:3px 11px;margin-top:12px;}
+  .books .note{font-size:12px;color:var(--slate);margin-top:34px;}
+
+  /* FOOTER */
+  footer{background:var(--navy-950);color:#fff;padding:64px 0 40px;border-top:1px solid var(--line-dark);}
+  footer .top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;}
+  footer .name{font-family:var(--disp);font-size:30px;font-weight:300;}
+  footer .name em{font-style:italic;color:var(--gold-bright);}
+  footer .jp{font-family:var(--jp-serif);color:var(--slate);font-size:14px;margin-top:6px;letter-spacing:.14em;}
+  footer .contact a{color:var(--gold-bright);font-size:14px;border-bottom:1px solid var(--line-dark);}
+  footer .copy{margin-top:44px;font-size:11px;letter-spacing:.1em;color:#5E6E86;}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;} html{scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a class="brand" href="#top">OWAKISHIGEO<span>, DVM</span></a>
+  <div class="links">
+    <a href="#about">プロフィール</a>
+    <a href="#apps">アプリ</a>
+    <a href="#research">研究</a>
+    <a class="cta" href="#access">アプリを使う</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="kicker reveal">
+      <span class="rule"></span>
+      <span class="eyebrow on-dark">Bovine Veterinarian ・ Okhotsk, Hokkaido</span>
+    </div>
+    <h1 class="reveal">Owaki<br><em>Shigeo</em></h1>
+    <div class="jp-name reveal">大脇 茂雄<small>獣医師 ／ 牛の臨床</small></div>
+    <p class="lede reveal">北海道・オホーツク地方で牛の診療にあたる臨床獣医師。現場で見つけた課題を、自らの手でソフトウェアと研究に変えています。</p>
+    <div class="triptych reveal">
+      <div class="t"><span class="num">i</span><div class="jp">診療</div><div class="en">Practice</div></div>
+      <div class="t"><span class="num">ii</span><div class="jp">開発</div><div class="en">Software</div></div>
+      <div class="t"><span class="num">iii</span><div class="jp">研究</div><div class="en">Research</div></div>
+    </div>
+  </div>
+  <div class="scrollcue">Scroll</div>
+</header>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Profile</span>
+      <h2>現場に立ち、道具をつくり、確かめる。</h2>
+      <span class="en">— practice, build, verify</span>
+    </div>
+    <div class="grid">
+      <div class="reveal">
+        <p><span class="lead">鹿児島県で育ち、帯広畜産大学で獣医学を学びました。</span>2003年から、北海道・オホーツク地方で牛の臨床にあたっています。</p>
+        <p>臨床獣医師の仕事は、病気を治すことだけではありません。予防、牛群管理、そして農場全体のコンサルテーションまで。一頭の牛から、群れ、そして農場経営へ——現場を包括的に診るのが、この仕事です。</p>
+        <p>牛の命を救い、農場を伸ばす。それが臨床獣医師の役目だと考えています。</p>
+        <p>その日々の現場から、記録や分析のためのソフトウェアづくり、症例の執筆や発表にも取り組んでいます。</p>
+      </div>
+      <dl class="facts reveal">
+        <dt>出身</dt><dd>鹿児島県</dd>
+        <dt>拠点</dt><dd>北海道・オホーツク地方</dd>
+        <dt>学歴</dt><dd>帯広畜産大学（2003年卒）</dd>
+        <dt>専門</dt><dd>乳牛を中心とした大動物臨床</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- APPS -->
+<section class="apps on-dark" id="apps">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow on-dark">Software / DairyNotebook</span>
+      <h2>現場の獣医師が、現場のためにつくったアプリ。</h2>
+      <span class="en">— built by a clinician, for clinicians</span>
+    </div>
+    <p class="intro reveal">インストール不要、ブラウザで動く軽量なアプリ群です。入力したデータは外部に送信されず、手元に保存されます。すべて無償でご利用いただけます。</p>
+    <div class="row">
+      <div class="appcard reveal">
+        <div class="shot"><img src="images/lu-dashboard.png" alt="DairyNotebook LU の画面" loading="lazy" onerror="this.closest('.shot').style.display='none'"></div>
+        <img class="app-icon" src="images/lu-icon.png" alt="DairyNotebook LU アイコン" loading="lazy"><div class="en">Lung Ultrasound</div>
+        <h3>肺エコー検診</h3>
+        <p>子牛の肺エコー所見を肺葉ごとに記録し、スコアを自動算出。ハッチマップやダッシュボードで群全体の傾向まで可視化します。</p>
+      </div>
+      <div class="appcard reveal">
+        <div class="shot"><img src="images/mt-report.png" alt="DairyNotebook MT の画面" loading="lazy" onerror="this.closest('.shot').style.display='none'"></div>
+        <img class="app-icon" src="images/mt-icon.png" alt="DairyNotebook MT アイコン" loading="lazy"><div class="en">Milk Testing</div>
+        <h3>乳検レポート</h3>
+        <p>乳検データを整理し、現場で知りたい指標をわかりやすく。個体から群まで、記録と分析を一つの流れに。</p>
+      </div>
+      <div class="appcard reveal">
+        <div class="shot"><img src="images/gm-report.png" alt="DairyNotebook GM の画面" loading="lazy" onerror="this.closest('.shot').style.display='none'"></div>
+        <img class="app-icon" src="images/gm-icon.png" alt="DairyNotebook GM アイコン" loading="lazy"><div class="en">Genomic Report</div>
+        <h3>ゲノムレポート</h3>
+        <p>ゲノム評価のデータを読み込み、順位付けや指標選択を直感的に。レポートづくりと農場への還元まで支援します。</p>
+      </div>
+    </div>
+    <div class="accessnote reveal">
+      <span class="big">ご利用は<span class="gold">無料</span>です。</span>
+      <span class="sub">メールをご登録いただくと、利用コードをお送りします。 →</span>
+    </div>
+  </div>
+</section>
+
+<!-- ACCESS / 申込 -->
+<section class="access on-dark" id="access">
+  <div class="wrap">
+    <div class="panel">
+      <div class="reveal">
+        <span class="eyebrow on-dark">Get access</span>
+        <h2 style="font-family:var(--jp-serif);font-weight:600;font-size:clamp(24px,3.6vw,34px);color:#fff;margin-top:14px;line-height:1.4;">アプリの利用コードを<br>受け取る</h2>
+        <p class="lede">下記からご登録ください。ご登録内容を確認のうえ、折り返し利用コードをお送りします。コードをアプリに入力するとご利用いただけます。</p>
+        <ol>
+          <li>メール・ご所属・使いたいアプリを選んで送信</li>
+          <li>確認のうえ、折り返し届く「利用コード」を受け取る</li>
+          <li>アプリを開き、コードを貼り付けて利用開始</li>
+        </ol>
+      </div>
+      <form class="form reveal" id="accessForm" onsubmit="return submitAccess(event)">
+        <label for="nm">お名前</label>
+        <input id="nm" type="text" required placeholder="例：大脇 茂雄" autocomplete="name">
+        <label for="em" class="field-gap">メールアドレス</label>
+        <input id="em" type="email" required placeholder="you@example.com" autocomplete="email">
+        <label for="pref" class="field-gap">都道府県</label>
+        <select id="pref" required>
+          <option value="" disabled selected>選択してください</option>
+          <option>北海道</option><option>青森県</option><option>岩手県</option><option>宮城県</option><option>秋田県</option><option>山形県</option><option>福島県</option>
+          <option>茨城県</option><option>栃木県</option><option>群馬県</option><option>埼玉県</option><option>千葉県</option><option>東京都</option><option>神奈川県</option>
+          <option>新潟県</option><option>富山県</option><option>石川県</option><option>福井県</option><option>山梨県</option><option>長野県</option>
+          <option>岐阜県</option><option>静岡県</option><option>愛知県</option><option>三重県</option>
+          <option>滋賀県</option><option>京都府</option><option>大阪府</option><option>兵庫県</option><option>奈良県</option><option>和歌山県</option>
+          <option>鳥取県</option><option>島根県</option><option>岡山県</option><option>広島県</option><option>山口県</option>
+          <option>徳島県</option><option>香川県</option><option>愛媛県</option><option>高知県</option>
+          <option>福岡県</option><option>佐賀県</option><option>長崎県</option><option>熊本県</option><option>大分県</option><option>宮崎県</option><option>鹿児島県</option><option>沖縄県</option>
+        </select>
+        <label for="org" class="field-gap">ご所属（区分）</label>
+        <select id="org" required>
+          <option value="" disabled selected>選択してください</option>
+          <option>家畜保健衛生所・普及センター</option>
+          <option>JA・農協</option>
+          <option>農業共済（NOSAI）</option>
+          <option>大学・研究機関</option>
+          <option>開業（産業動物）</option>
+          <option>開業（小動物）</option>
+          <option>その他</option>
+        </select>
+        <label for="orgName" class="field-gap">所属先の名称</label>
+        <input id="orgName" type="text" required placeholder="例：○○農業共済 △△支所 ／ △△農協 ／ ○○動物病院" autocomplete="organization">
+        <label class="field-gap" style="margin-bottom:0;">使いたいアプリ</label>
+        <div class="chips" id="chips" role="group" aria-label="使いたいアプリ" style="margin-top:10px;">
+          <span class="chip" role="button" tabindex="0" data-app="LU" aria-pressed="true">肺エコー LU</span>
+          <span class="chip" role="button" tabindex="0" data-app="MT" aria-pressed="false">乳検 MT</span>
+          <span class="chip" role="button" tabindex="0" data-app="GM" aria-pressed="false">ゲノム GM</span>
+        </div>
+        <button type="submit">利用コードを受け取る</button>
+        <div class="msg" id="formMsg"></div>
+        <p class="privacy">ご登録いただく情報は、利用コードのお送りとアプリに関するご連絡にのみ使用します。ご登録内容を確認のうえお送りするため、発行までお時間をいただく場合があります。※このページは準備中のため、現在は送信のテスト表示のみです。</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section class="research" id="research">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Research / Publications</span>
+      <h2>臨床から生まれる、症例と考察。</h2>
+      <span class="en">— selected publication</span>
+    </div>
+    <article class="pub reveal">
+      <div>
+        <div class="year">2025</div>
+        <div class="venue">日本獣医師会雑誌</div>
+      </div>
+      <div>
+        <h3>血中抗ミューラー管ホルモンレベルが高値を示すも病態が異なった乳用育成牛の2症例</h3>
+        <p class="authors"><b>大脇茂雄</b>、内山愛子、一色大志、金田利明、渡部萌、関口洋、渡辺隆、渡邉謙一</p>
+        <p class="meta">日本獣医師会雑誌 78巻 8号 p. e110–e114 ／ DOI: 10.12935/jvma.78.e110</p>
+      </div>
+      <a class="link" href="https://doi.org/10.12935/jvma.78.e110" target="_blank" rel="noopener">論文を読む ↗</a>
+    </article>
+    <article class="pub reveal">
+      <div>
+        <div class="year">2023</div>
+        <div class="venue">北海道獣医師会雑誌</div>
+      </div>
+      <div>
+        <span class="award">産業動物獣医学会 北海道地区学会長賞 受賞</span>
+        <h3>ホルスタイン成乳牛の十二指腸S状曲部変位による腸閉塞の4例</h3>
+        <p class="authors"><b>大脇茂雄</b>、金田利明、小林弘典、内山愛子、坂口加奈、渡辺隆、倉富幹太</p>
+        <p class="meta">北獣会誌 67巻 p. 351–354（原著・産業動物）</p>
+      </div>
+      <a class="link" href="https://www.hokkaido-juishikai.jp/wp2/wp-content/uploads/2023/09/0881e577f5d2a854fdfb3180124c2cb5.pdf" target="_blank" rel="noopener">論文を読む ↗</a>
+    </article>
+    <article class="pub reveal">
+      <div>
+        <div class="year">2020</div>
+        <div class="venue">北海道獣医師会雑誌</div>
+      </div>
+      <div>
+        <h3>定期繁殖検診を契機に生産性が向上した酪農場の1例</h3>
+        <p class="authors"><b>大脇茂雄</b></p>
+        <p class="meta">北獣会誌 64巻 p. 241–244（短報・産業動物）</p>
+      </div>
+      <a class="link" href="https://www.hokkaido-juishikai.jp/wp2/wp-content/uploads/2020/08/be17f46853f005cae5a2876f937e4e36.pdf" target="_blank" rel="noopener">論文を読む ↗</a>
+    </article>
+    <article class="pub reveal">
+      <div>
+        <div class="year">2015</div>
+        <div class="venue">北海道獣医師会雑誌</div>
+      </div>
+      <div>
+        <span class="award">北海道獣医師会雑誌 優秀論文賞（産業動物獣医学部門）受賞</span>
+        <h3>主に妊娠率に着目し繁殖問題を解決した農場の一例</h3>
+        <p class="authors"><b>大脇茂雄</b></p>
+        <p class="meta">北海道獣医師会雑誌（平成27年度 優秀論文）</p>
+      </div>
+    </article>
+    <p class="note">※ 掲載誌の著作権に配慮し、全文は出版元へのリンクでご案内しています。論文は順次掲載予定です。</p>
+  </div>
+</section>
+
+<!-- BOOKS -->
+<section class="books on-dark" id="books">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow on-dark">Books</span>
+      <h2>著書（分担執筆）。</h2>
+      <span class="en">— contributing author</span>
+    </div>
+    <p class="intro reveal">牛の臨床で広く読まれる定番書に、執筆者の一人として加わっています。</p>
+    <div class="book-row">
+      <a class="book reveal" href="https://www.midorishobo.co.jp/SHOP/4251.html" target="_blank" rel="noopener">
+        <div class="cover"><img src="images/book-geka.jpg" alt="牛の臨床外科 表紙" loading="lazy"></div>
+        <h3>牛の臨床外科</h3>
+        <p class="pub">緑書房／2025　編著：佐藤礼一郎</p>
+        <span class="role">分担執筆</span>
+      </a>
+      <a class="book reveal" href="https://dairyman-ec.com/i/60004" target="_blank" rel="noopener">
+        <div class="cover"><img src="images/book-rinsho.jpg" alt="主要症状を基礎にした 牛の臨床3 表紙" loading="lazy"></div>
+        <h3>主要症状を基礎にした 牛の臨床3</h3>
+        <p class="pub">デーリィマン社　監修：小岩政照・田島誉士</p>
+        <span class="role">分担執筆</span>
+      </a>
+      <a class="book reveal" href="https://dairyman-ec.com/i/30034" target="_blank" rel="noopener">
+        <div class="cover"><img src="images/book-tvdoctor.jpg" alt="テレビ・ドクター4 よく分かる乳牛の病気100選 表紙" loading="lazy"></div>
+        <h3>テレビ・ドクター4<br>よく分かる乳牛の病気100選</h3>
+        <p class="pub">デーリィマン社（臨時増刊号）　監修：小岩政照・田島誉士</p>
+        <span class="role">分担執筆</span>
+      </a>
+    </div>
+    <p class="note">※ 表紙画像は各出版社の書籍を示すものです。各書名から販売ページをご覧いただけます。</p>
+  </div>
+</section>
+
+<!-- MEDIA -->
+<section class="media" id="media">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Media / Writing</span>
+      <h2>誌面での情報提供。</h2>
+      <span class="en">— articles &amp; contributions</span>
+    </div>
+    <article class="contrib reveal">
+      <div>
+        <span class="serial-when">連 載</span>
+        <div class="venue" style="margin-top:10px;">DAIRYMAN（デーリィマン）</div>
+      </div>
+      <div>
+        <h3>獣医療の現場から</h3>
+        <p class="role">「臨床獣医師の仕事 ～人を育て産業に寄与する～」など、複数部にわたる長期連載（第26部ほか）。</p>
+      </div>
+      <a class="link" href="https://dairyman.co.jp/media/dairyman_list/3786/" target="_blank" rel="noopener">記事を見る ↗</a>
+    </article>
+    <article class="contrib reveal">
+      <div>
+        <span class="serial-when">連 載</span>
+        <div class="venue" style="margin-top:10px;">臨床獣医（緑書房）</div>
+      </div>
+      <div>
+        <h3>牛の臨床外科学</h3>
+        <p class="role">腸管手術ほか、複数回にわたる連載（第9回ほか）。橘泰光 共著／佐藤礼一郎 監修。</p>
+      </div>
+      <a class="link" href="https://www.midorishobo.co.jp/SHOP/6432104.html" target="_blank" rel="noopener">記事を見る ↗</a>
+    </article>
+    <article class="contrib reveal">
+      <div>
+        <div class="when">2026.07</div>
+        <div class="venue">DAIRYMAN（デーリィマン）</div>
+      </div>
+      <div>
+        <h3>第四胃変位発症の三条件と予防策</h3>
+        <p class="role">技術ワイド「移行期管理を再確認」</p>
+      </div>
+      <a class="link" href="http://dairyman.co.jp/media/dairyman_list/8982/" target="_blank" rel="noopener">記事を見る ↗</a>
+    </article>
+    <article class="contrib reveal">
+      <div>
+        <div class="when">2023.12</div>
+        <div class="venue">家畜診療</div>
+      </div>
+      <div>
+        <h3>「DairyComp 305」の特徴とその基本的な使い方</h3>
+        <p class="role">家畜診療 70巻12号 p. 717–721</p>
+      </div>
+      <a class="link" href="https://cir.nii.ac.jp/crid/1520298532747409536" target="_blank" rel="noopener">記事を見る ↗</a>
+    </article>
+    <article class="contrib reveal">
+      <div>
+        <div class="when">2022.04</div>
+        <div class="venue">Dairy Japan</div>
+      </div>
+      <div>
+        <h3>乳質改善 バケット搾乳群で乳頭口の損傷が起こっていた！</h3>
+        <p class="role">連載「現場で活かす酪農技術」／乳頭口スコアに着目した大規模農場の乳質改善の一事例</p>
+      </div>
+      <a class="link" href="https://dairyjapan.com/?page_id=6931" target="_blank" rel="noopener">記事を見る ↗</a>
+    </article>
+    <p class="note">※ 一部を掲載しています。寄稿・連載は順次追加予定です。</p>
+  </div>
+</section>
+
+<!-- TALKS -->
+<section class="talks" id="talks">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Presentations</span>
+      <h2>学会発表・講演。</h2>
+      <span class="en">— talks &amp; lectures</span>
+    </div>
+    <article class="talk reveal">
+      <div>
+        <div class="when">2026.08</div>
+        <div class="venue">北海道獣医師会 地区学会（産業動物）</div>
+      </div>
+      <div>
+        <h3>牛 肺エコー検診記録分析アプリ「DairyNotebook LU」の開発と実践</h3>
+        <p class="role">大脇茂雄、川向一子</p>
+      </div>
+    </article>
+    <article class="talk reveal">
+      <div>
+        <div class="when">2024.02</div>
+        <div class="venue">畜ガールズ セミナー「これからの獣医療」（オンライン）</div>
+      </div>
+      <div>
+        <h3>Dairy Comp 305 の組織としての導入とその展開 — 北海道オホーツクのチームとしての獣医療 —</h3>
+        <p class="role">大脇茂雄（登壇）</p>
+      </div>
+    </article>
+    <article class="talk reveal">
+      <div>
+        <div class="when">2019.03</div>
+        <div class="venue">北酪検 検定員中央研修会</div>
+      </div>
+      <div>
+        <h3>発情発見からの繁殖改善 — 薬剤だけでは繁殖は改善できない —</h3>
+        <p class="role">大脇茂雄（講演）</p>
+      </div>
+    </article>
+    <article class="talk reveal">
+      <div>
+        <div class="when">2008.02</div>
+        <div class="venue">しゃくなげ会（第40回・北海道）</div>
+      </div>
+      <div>
+        <h3>周産期の管理は蹄病発生に影響を与える — 一農場の事例から —</h3>
+        <p class="role">大脇茂雄（講演）</p>
+      </div>
+    </article>
+    <p class="note">※ 一部を掲載しています。発表・講演は順次追加予定です。</p>
+  </div>
+</section>
+
+<!-- OFF DUTY -->
+<section class="offduty-sec on-dark" id="offduty">
+  <div class="wrap">
+    <p class="od-intro reveal">獣医師の仕事を離れて——個人的につくった、もう一つのアプリです。</p>
+    <div class="offduty reveal">
+      <img class="od-icon" src="images/baseball-log-icon.png" alt="Baseball Log アプリアイコン" loading="lazy">
+      <div class="od-body">
+        <span class="od-tag">番外編 ／ OFF DUTY</span>
+        <h3>Baseball Log</h3>
+        <p>野球の試合スコアを記録するアプリ。走者の進塁やスコアを自動で推定し、選手カードで成績も残せます。</p>
+        <div class="od-links">
+          <a href="https://baseball-log.com/" target="_blank" rel="noopener">詳しくはこちら ↗</a>
+          <a href="https://apps.apple.com/app/baseball-log/id6795148572" target="_blank" rel="noopener">App Store ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <div class="name">Owaki <em>Shigeo</em></div>
+        <div class="jp">大脇 茂雄 ／ 牛の臨床獣医師</div>
+      </div>
+      <div class="contact">
+        <span class="eyebrow on-dark" style="display:block;margin-bottom:8px;">Contact</span>
+        <a href="mailto:shigeo.o.dvm@gmail.com">shigeo.o.dvm@gmail.com</a>
+        <a href="https://x.com/DvmShigeo" target="_blank" rel="noopener" style="display:block;margin-top:10px;">X ／ @DvmShigeo</a>
+        <a href="https://www.youtube.com/@owakishigeodvmchannel1315" target="_blank" rel="noopener" style="display:block;margin-top:10px;">YouTube ／ OWAKISHIGEO, DVM Channel</a>
+      </div>
+    </div>
+    <div class="copy">© 2026 OWAKI SHIGEO, DVM. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  // nav scrolled state
+  var nav=document.getElementById('nav');
+  function onScroll(){ nav.classList.toggle('scrolled', window.scrollY>40); }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+  // reveal on scroll
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); },{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  // app chips
+  document.querySelectorAll('#chips .chip').forEach(function(c){
+    function toggle(){ c.setAttribute('aria-pressed', c.getAttribute('aria-pressed')==='true'?'false':'true'); }
+    c.addEventListener('click',toggle);
+    c.addEventListener('keydown',function(e){ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); toggle(); } });
+  });
+
+  // form (placeholder — 送信は準備中)
+  function submitAccess(e){
+    e.preventDefault();
+    var name=document.getElementById('nm').value.trim();
+    var email=document.getElementById('em').value.trim();
+    var pref=document.getElementById('pref').value;
+    var org=document.getElementById('org').value;
+    var orgName=document.getElementById('orgName').value.trim();
+    var apps=Array.prototype.slice.call(document.querySelectorAll('#chips .chip[aria-pressed="true"]')).map(function(c){return c.dataset.app;});
+    var msg=document.getElementById('formMsg');
+    if(!name){ msg.textContent='お名前をご記入ください。'; return false; }
+    if(!pref){ msg.textContent='都道府県をお選びください。'; return false; }
+    if(!org){ msg.textContent='ご所属（区分）をお選びください。'; return false; }
+    if(!orgName){ msg.textContent='所属先の名称をご記入ください。'; return false; }
+    if(apps.length===0){ msg.textContent='使いたいアプリを1つ以上お選びください。'; return false; }
+    msg.textContent='ありがとうございます（'+name+' 様 ／ '+email+' ／ '+pref+' ／ '+org+'：'+orgName+' ／ '+apps.join('・')+'）。※このページは準備中です。公開後は、ご登録内容を確認のうえ利用コードをお送りする仕組みになります。';
+    return false;
+  }
+</script>
+</body>
+</html>
