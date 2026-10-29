@@ -553,11 +553,11 @@
           <li>アプリを開き、コードを貼り付けて利用開始</li>
         </ol>
       </div>
-      <form class="form reveal" id="accessForm" onsubmit="return submitAccess(event)">
+      <form class="form reveal" id="accessForm" onsubmit="return submitAccess(event)" novalidate>
         <label for="nm">お名前</label>
         <input id="nm" type="text" required placeholder="例：大脇 茂雄" autocomplete="name">
         <label for="em" class="field-gap">メールアドレス</label>
-        <input id="em" type="email" required placeholder="you@example.com" autocomplete="email">
+        <input id="em" type="email" inputmode="email" required placeholder="you@example.com" autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false">
         <label for="pref" class="field-gap">都道府県</label>
         <select id="pref" required>
           <option value="" disabled selected>選択してください</option>
@@ -1215,11 +1215,19 @@
     c.addEventListener('keydown',function(e){ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); toggle(); } });
   });
 
+  // メールアドレスの整形：全角→半角、見えない文字・空白の除去、末尾の「。」「.」の除去
+  function normalizeEmail(v){
+    return String(v||'').normalize('NFKC')
+      .replace(/[\u200B-\u200F\u202A-\u202E\u2060-\u2064\uFEFF\u00AD]/g,'').trim()
+      .replace(/[。｡、，,.]+$/,'');
+  }
+
   // form → Google Apps Script（メール通知＋スプレッドシート）
   async function submitAccess(e){
     e.preventDefault();
     var name=document.getElementById('nm').value.trim();
-    var email=document.getElementById('em').value.trim();
+    var emailEl=document.getElementById('em');
+    var email=normalizeEmail(emailEl.value);
     var pref=document.getElementById('pref').value;
     var org=document.getElementById('org').value;
     var orgName=document.getElementById('orgName').value.trim();
@@ -1227,6 +1235,8 @@
     var msg=document.getElementById('formMsg');
     var btn=document.getElementById('accessSubmitBtn');
     if(!name){ msg.textContent='お名前を記入してください。'; return false; }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ msg.textContent='メールアドレスの形式を確認してください（例：you@example.com）。全角文字や余分な記号が入っていないかもご確認ください。'; return false; }
+    emailEl.value=email;
     if(!pref){ msg.textContent='都道府県を選んでください。'; return false; }
     if(!org){ msg.textContent='所属（区分）を選んでください。'; return false; }
     if(!orgName){ msg.textContent='所属先の名称を記入してください。'; return false; }
